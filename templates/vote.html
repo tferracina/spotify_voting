@@ -1,0 +1,58 @@
+<!-- templates/vote.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vote for Songs</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        .song-container {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+        }
+        .song {
+            background-color: #fff;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            width: 45%;
+            text-align: center;
+        }
+        iframe {
+            border: none;
+        }
+        a {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Vote for Your Favorite Song</h1>
+    <div class="song-container">
+        <div class="song">
+            <iframe src="https://open.spotify.com/embed/track/{{ song1.spotify_id }}" width="300" height="80"></iframe>
+            <a href="{{ url_for('cast_vote', song_id=song1.id) }}">Vote for {{ song1.name }}</a>
+        </div>
+        <div class="song">
+            <iframe src="https://open.spotify.com/embed/track/{{ song2.spotify_id }}" width="300" height="80"></iframe>
+            <a href="{{ url_for('cast_vote', song_id=song2.id) }}">Vote for {{ song2.name }}</a>
+        </div>
+    </div>
+    <a href="{{ url_for('vote') }}">Skip</a>
+</body>
+</html>
