@@ -1,9 +1,11 @@
+import os
 from flask import Flask, render_template, request, redirect, url_for
 from spotipy.oauth2 import SpotifyClientCredentials
 import spotipy
 import random
 from models import db, Song, init_db
 import config
+import logging
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///songs.db'

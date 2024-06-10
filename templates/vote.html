@@ -23,18 +23,18 @@
         .song-container {
             display: flex;
             justify-content: space-around;
-            gap: 20px;
+            gap: 40px;
             width: 100%;
-            max-width: 800px;
+            max-width: 1200px;
             margin: 0 auto;
         }
         .song {
             background-color: #ffffff;
-            padding: 20px;
+            padding: 30px;
             border: 1px solid #e0e0e0;
             border-radius: 10px;
             width: 100%;
-            max-width: 350px;
+            max-width: 500px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             text-align: center;
             transition: transform 0.2s;
@@ -45,17 +45,18 @@
         iframe {
             border: none;
             border-radius: 10px;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
         }
         a {
             display: inline-block;
             margin-top: 10px;
-            padding: 10px 20px;
+            padding: 15px 30px;
             background-color: #007bff;
             color: #ffffff;
             text-decoration: none;
             border-radius: 5px;
             transition: background-color 0.2s;
+            font-size: 1.2em;
         }
         a:hover {
             background-color: #0056b3;
@@ -63,15 +64,16 @@
         .navigation {
             margin-top: 30px;
             display: flex;
-            gap: 20px;
+            gap: 40px;
         }
         .navigation a {
-            padding: 10px 20px;
+            padding: 20px 40px;
             background-color: #6c757d;
             color: #ffffff;
             border-radius: 5px;
             text-decoration: none;
             transition: background-color 0.2s;
+            font-size: 1.2em;
         }
         .navigation a:hover {
             background-color: #5a6268;
@@ -82,11 +84,11 @@
     <h1>Vote for Your Favorite Song</h1>
     <div class="song-container">
         <div class="song">
-            <iframe src="https://open.spotify.com/embed/track/{{ song1.spotify_id }}" width="300" height="80"></iframe>
+            <iframe src="https://open.spotify.com/embed/track/{{ song1.spotify_id }}" width="400" height="80"></iframe>
             <a href="{{ url_for('cast_vote', song_id=song1.id) }}">Vote for {{ song1.name }}</a>
         </div>
         <div class="song">
-            <iframe src="https://open.spotify.com/embed/track/{{ song2.spotify_id }}" width="300" height="80"></iframe>
+            <iframe src="https://open.spotify.com/embed/track/{{ song2.spotify_id }}" width="400" height="80"></iframe>
             <a href="{{ url_for('cast_vote', song_id=song2.id) }}">Vote for {{ song2.name }}</a>
         </div>
     </div>

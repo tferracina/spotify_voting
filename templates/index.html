@@ -38,8 +38,14 @@
             align-items: center;
             transition: transform 0.2s;
         }
-        li:hover {
-            transform: translateY(-5px);
+        .gold {
+            background-color: gold;
+        }
+        .silver {
+            background-color: silver;
+        }
+        .bronze {
+            background-color: #cd7f32;
         }
         .song-info {
             display: flex;
@@ -70,9 +76,9 @@
     <h1>Top Voted Songs</h1>
     <ul>
         {% for song in leaderboard %}
-            <li>
+            <li class="{% if loop.index == 1 %}gold{% elif loop.index == 2 %}silver{% elif loop.index == 3 %}bronze{% endif %}">
                 <div class="song-info">
-                    <strong>{{ song.name }}</strong> by {{ song.artist }}
+                    <strong>{{ loop.index }}. {{ song.name }}</strong> by {{ song.artist }}
                 </div>
                 <div class="votes">{{ song.votes }} votes</div>
             </li>
