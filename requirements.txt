@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 async-timeout==4.0.3
 blinker==1.8.2
 certifi==2024.6.2
@@ -19,3 +20,12 @@ typing_extensions==4.12.2
 urllib3==2.2.1
 Werkzeug==3.0.3
 zipp==3.19.2
+=======
+Flask==3.0.0
+Flask-SQLAlchemy==3.1.1
+numpy==1.23.5
+setuptools==70.0.0
+wheel
+spotipy==2.22.1
+SQLAlchemy==2.0.30
+>>>>>>> 6bbbe7387f56ae6e19f1ebeb8a99320385ae8cdc
