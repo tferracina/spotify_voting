@@ -43,4 +43,4 @@ with app.app_context():
         offset += LIMIT
 
     db.session.commit()
-    print("Database populated with sample data.")
+    print("Database populated with data.")

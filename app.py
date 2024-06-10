@@ -15,22 +15,6 @@ with app.app_context():
 sp = spotipy.Spotify(auth_manager=SpotifyClientCredentials(client_id=config.SPOTIPY_CLIENT_ID,
                                                            client_secret=config.SPOTIPY_CLIENT_SECRET))
 
-PLAYLIST_ID = 'your_playlist_id'
-
-def get_playlist_track_ids():
-    track_ids = []
-    results = sp.playlist_tracks(PLAYLIST_ID)
-    while results['items']:
-        for item in results['items']:
-            track = item['track']
-            track_ids.append(track['id'])
-        
-        if results['next']:
-            results = sp.next(results)
-        else:
-            break
-    return track_ids
-
 @app.route('/')
 def index():
     try:
