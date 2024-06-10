@@ -11,7 +11,7 @@ import requests  # Make sure to import requests
 app = Flask(__name__)
 
 # Update this line to use PostgreSQL
-app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL', 'postgres://default:Str9ZyPC4qeg@ep-spring-limit-a49zt1rz-pooler.us-east-1.aws.neon.tech/verceldb?sslmode=require')
+app.config['SQLALCHEMY_DATABASE_URI'] = config.DATABASE_URL
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 # Set up logging

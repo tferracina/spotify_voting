@@ -1,0 +1,94 @@
+<!-- templates/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}My Flask App{% endblock %}</title>
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            background-color: #f7f9fc;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        h1 {
+            color: #333;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+        .song-container {
+            display: flex;
+            justify-content: space-around;
+            gap: 40px;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .song {
+            background-color: #ffffff;
+            padding: 30px;
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            width: 100%;
+            max-width: 500px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.2s;
+        }
+        .song:hover {
+            transform: translateY(-5px);
+        }
+        iframe {
+            border: none;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        a {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 15px 30px;
+            background-color: #007bff;
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.2s;
+            font-size: 1.2em;
+        }
+        a:hover {
+            background-color: #0056b3;
+        }
+        .navigation {
+            margin-top: 30px;
+            display: flex;
+            gap: 40px;
+        }
+        .navigation a {
+            padding: 20px 40px;
+            background-color: #6c757d;
+            color: #ffffff;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.2s;
+            font-size: 1.2em;
+        }
+        .navigation a:hover {
+            background-color: #5a6268;
+        }
+    </style>
+    {% block head %}
+    {% endblock %}
+</head>
+<body>
+    {% block body %}
+    {% endblock %}
+    <!-- Add the Vercel Analytics script here -->
+    <script src="https://vercel.com/analytics.js"></script>
+    {% block scripts %}
+    {% endblock %}
+</body>
+</html>
