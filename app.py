@@ -6,10 +6,16 @@ import random
 from models import db, Song, init_db
 import config
 import logging
+import requests  # Make sure to import requests
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///songs.db'
+
+# Update this line to use PostgreSQL
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL', 'postgres://default:Str9ZyPC4qeg@ep-spring-limit-a49zt1rz-pooler.us-east-1.aws.neon.tech/verceldb?sslmode=require')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+# Set up logging
+logging.basicConfig(level=logging.DEBUG)
 
 with app.app_context():
     init_db(app)  # Initialize the database and create tables
@@ -23,38 +29,35 @@ def index():
         leaderboard = Song.query.order_by(Song.votes.desc()).limit(10).all()
         return render_template('index.html', leaderboard=leaderboard)
     except Exception as e:
+        app.logger.error(f"An error occurred: {e}")
         return f"An error occurred: {e}"
 
 @app.route('/vote')
 def vote():
     try:
-        # Query all songs from the database
         tracks = Song.query.all()
-
-        # Randomly select two songs from the list
         song1, song2 = random.sample(tracks, 2)
-
-        # Debug statements to log the selected songs
         app.logger.debug(f"Song1: {song1}")
         app.logger.debug(f"Song2: {song2}")
-
-        # Render the vote.html template with the selected songs
         return render_template('vote.html', song1=song1, song2=song2)
-
     except Exception as e:
-        # Log the error message
         app.logger.error(f"An error occurred: {e}")
         return f"An error occurred: {e}", 500
 
 @app.route('/vote/<int:song_id>')
 def cast_vote(song_id):
     try:
-        song = Song.query.get(song_id)
-        if song:
-            song.votes += 1
-            db.session.commit()
-        return redirect(url_for('vote'))
+        vercel_url = os.getenv("VERCEL_URL")
+        if not vercel_url:
+            raise ValueError("VERCEL_URL environment variable not set")
+
+        response = requests.get(f'{vercel_url}/api/vote?song_id={song_id}')
+        if response.status_code == 200:
+            return redirect(url_for('vote'))
+        else:
+            raise Exception(response.text)
     except Exception as e:
+        app.logger.error(f"An error occurred: {e}")
         return f"An error occurred: {e}"
 
 if __name__ == '__main__':

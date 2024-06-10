@@ -3,3 +3,4 @@
 instance/songs.db
 config.py
 spotify_voting_env/
+.vercel

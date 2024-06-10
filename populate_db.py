@@ -1,4 +1,4 @@
-# populate_db.py
+import os
 from flask import Flask
 from spotipy.oauth2 import SpotifyClientCredentials
 import spotipy
@@ -6,8 +6,11 @@ import config
 from models import db, Song
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///songs.db'
+
+# Update this line to use PostgreSQL
+app.config['SQLALCHEMY_DATABASE_URI'] = config.DATABASE_URL
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
 db.init_app(app)
 
 sp = spotipy.Spotify(auth_manager=SpotifyClientCredentials(client_id=config.SPOTIPY_CLIENT_ID,
