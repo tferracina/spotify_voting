@@ -1,4 +1,3 @@
-# populate_db.py
 from flask import Flask
 from spotipy.oauth2 import SpotifyClientCredentials
 import spotipy
@@ -6,7 +5,7 @@ import config
 from models import db, Song
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///songs.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = config.DATABASE_URL
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db.init_app(app)
 
@@ -18,6 +17,11 @@ LIMIT = 100  # Maximum value allowed by the API
 
 def track_exists(spotify_id):
     return db.session.query(Song).filter_by(spotify_id=spotify_id).first() is not None
+
+def truncate_string(value, max_length):
+    if len(value) > max_length:
+        return value[:max_length-3] + '...'  # Truncate and add ellipsis
+    return value
 
 with app.app_context():
     db.create_all()  # Ensure tables are created
@@ -34,8 +38,8 @@ with app.app_context():
                 print(track['name'])  # Print track name for debugging
                 song = Song(
                     spotify_id=track['id'],
-                    name=track['name'],
-                    artist=', '.join(artist['name'] for artist in track['artists']),
+                    name=truncate_string(track['name'], 100),
+                    artist=truncate_string(', '.join(artist['name'] for artist in track['artists']), 100),
                     votes=0  # Initializing votes to 0
                 )
                 db.session.add(song)
