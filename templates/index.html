@@ -52,28 +52,34 @@
             flex-direction: column;
         }
         .votes {
-            background-color: #007bff;
+            background-color: #28a745;
             color: #ffffff;
             padding: 5px 10px;
             border-radius: 5px;
         }
+        .gold .votes,
+        .silver .votes,
+        .bronze .votes {
+            background-color: #ffffff;
+            color: #333;
+        }
         a {
             text-decoration: none;
-            color: #007bff;
-            margin-top: 20px;
-            padding: 10px 20px;
-            background-color: #007bff;
             color: #ffffff;
+            margin-bottom: 20px;
+            padding: 10px 20px;
+            background-color: #28a745;
             border-radius: 5px;
             transition: background-color 0.2s;
         }
         a:hover {
-            background-color: #0056b3;
+            background-color: #218838;
         }
     </style>
 </head>
 <body>
     <h1>Top Voted Songs</h1>
+    <a href="{{ url_for('vote') }}">Vote for Songs</a>
     <ul>
         {% for song in leaderboard %}
             <li class="{% if loop.index == 1 %}gold{% elif loop.index == 2 %}silver{% elif loop.index == 3 %}bronze{% endif %}">
@@ -84,6 +90,5 @@
             </li>
         {% endfor %}
     </ul>
-    <a href="{{ url_for('vote') }}">Vote for Songs</a>
 </body>
 </html>
